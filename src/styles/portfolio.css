@@ -1,0 +1,206 @@
+/* ── Portfolio Section ───────────────────────────────────────── */
+.portfolio {
+  padding: 68px 0 68px 24px;
+  overflow: hidden;
+}
+@media (min-width: 768px) { .portfolio { padding: 120px 0 120px 64px; } }
+
+.portfolio-top {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 32px;
+  padding-right: 24px;
+}
+@media (min-width: 768px) {
+  .portfolio-top {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    padding-right: 64px;
+  }
+}
+
+/* ── Video Grid ──────────────────────────────────────────────── */
+.vgrid {
+  display: grid;
+  gap: 4px;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 175px;
+}
+@media (min-width: 640px)  { .vgrid { grid-auto-rows: 210px; } }
+@media (min-width: 1024px) {
+  .vgrid {
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 400px 260px;
+    grid-auto-rows: auto;
+  }
+}
+
+/* ── Video Tile ──────────────────────────────────────────────── */
+.vtile {
+  position: relative;
+  overflow: hidden;
+  background: var(--dk);
+}
+.vtile img {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: auto;
+  object-fit: unset;
+}
+
+/* Hero tile spans 2 cols on mobile, 2 rows on desktop */
+.vtile.hero-t { grid-column: span 2; }
+@media (min-width: 1024px) {
+  .vtile.hero-t { grid-column: auto; grid-row: span 2; }
+}
+
+.vtile video {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.vtile:hover video { transform: scale(1.05); }
+
+/* Permanent bottom vignette */
+.vtile.vtile-video::before {
+  content: '';
+  position: absolute;
+  inset: 0; z-index: 1;
+  background: linear-gradient(to top, rgba(10,10,10,0.75) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Info — slides up on hover */
+.vtile-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 2;
+  padding: 12px 12px 10px;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s;
+}
+@media (min-width: 768px) { .vtile-info { padding: 18px 20px; } }
+.vtile.hero-t .vtile-info { padding: 20px 22px; }
+@media (min-width: 1024px) { .vtile.hero-t .vtile-info { padding: 32px 36px; } }
+.vtile:hover .vtile-info { transform: translateY(0); opacity: 1; }
+
+.vtile-cat {
+  font-size: 7.5px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--m);
+  font-weight: 300;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.vtile-cat::before { content: ''; width: 10px; height: 1px; background: var(--m); }
+
+.vtile-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.1;
+  font-size: 13px;
+}
+@media (min-width: 768px) { .vtile-name { font-size: 15px; } }
+.hero-t .vtile-name { font-size: clamp(17px, 2.5vw, 34px); }
+
+/* "Playing" pill */
+.vtile-pill {
+  position: absolute;
+  top: 9px; left: 9px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 3px 9px 3px 6px;
+  font-size: 7.5px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.8);
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.vtile:hover .vtile-pill { opacity: 1; }
+
+.vtile-pill-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--m);
+  animation: pulse 1.4s ease infinite;
+}
+
+/* Placeholder shimmer */
+.vtile-ph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: rgba(255,255,255,0.12);
+  background: linear-gradient(135deg, #111, #1e1e1e, #111);
+  background-size: 200% 200%;
+  animation: shimmer 4s ease infinite;
+  transition: opacity 0.4s ease;
+}
+
+/* Images — show full photo, no cropping */
+.vtile.vtile-image {
+  height: auto;
+  aspect-ratio: unset;
+}
+
+.vtile.vtile-image img {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: auto;
+  object-fit: unset;
+  display: block;
+}
+
+.vtile.vtile-image .vtile-ph {
+  position: relative;
+  height: 200px;
+}
+
+/* Loading skeleton */
+.vgrid-loading {
+  display: grid;
+  gap: 4px;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 175px;
+}
+@media (min-width: 1024px) {
+  .vgrid-loading {
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 520px 360px;
+  }
+}
+
+.vtile-skeleton {
+  background: linear-gradient(135deg, #111, #1e1e1e, #111);
+  background-size: 200% 200%;
+  animation: shimmer 2s ease infinite;
+}
+
+.vtile-skeleton:first-child {
+  grid-row: span 2;
+}

@@ -1,0 +1,164 @@
+/* ── Structural line animations ────────────────────────────────── */
+@keyframes vGrow     { to { height: 100%; } }
+@keyframes hGrow     { to { width: calc(100% - 130px); } }
+@keyframes cornerPop { to { width: 36px; height: 36px; } }
+@keyframes fadeUp    { to { opacity: 1; transform: translateY(0); } }
+@keyframes lineReveal{ to { opacity: 1; transform: translateY(0); } }
+@keyframes scrollAnim{ to { left: 100%; } }
+
+/* ── Section ────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding: 110px 24px 80px;
+  overflow: hidden;
+}
+@media (min-width: 768px) { .hero { padding: 140px 64px 100px; } }
+
+/* Decorative lines — desktop only */
+.h-vline, .h-hline, .h-corner { display: none; }
+
+@media (min-width: 1024px) {
+  .h-vline {
+    display: block;
+    position: absolute;
+    top: 0; right: 130px;
+    width: 1px; height: 0;
+    background: var(--gr);
+    animation: vGrow 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  }
+  .h-hline {
+    display: block;
+    position: absolute;
+    bottom: 130px; left: 0;
+    height: 1px; width: 0;
+    background: var(--gr);
+    animation: hGrow 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+  }
+  .h-corner {
+    display: block;
+    position: absolute;
+    bottom: 129px; right: 129px;
+    width: 0; height: 0;
+    border-right: 2px solid var(--m);
+    border-bottom: 2px solid var(--m);
+    animation: cornerPop 0.5s ease 2.2s forwards;
+  }
+}
+
+/* Tag line */
+.hero-tag {
+  font-weight: 300;
+  font-size: 9.5px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--m);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.9s forwards;
+}
+.hero-tag::before { content: ''; width: 20px; height: 1px; background: var(--m); }
+
+/* Headline */
+.hero-h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(50px, 12vw, 136px);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--dk);
+}
+.hero-h1 em { font-style: italic; color: var(--m); }
+
+.hero-line {
+  display: block;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(60px);
+}
+.hero-line.a1 { animation: lineReveal 0.95s cubic-bezier(0.16, 1, 0.3, 1) 1.05s forwards; }
+.hero-line.a2 { animation: lineReveal 0.95s cubic-bezier(0.16, 1, 0.3, 1) 1.22s forwards; }
+.hero-line.a3 { animation: lineReveal 0.95s cubic-bezier(0.16, 1, 0.3, 1) 1.39s forwards; }
+
+/* Sub copy */
+.hero-sub {
+  margin-top: 32px;
+  max-width: 400px;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--md);
+  opacity: 0;
+  animation: fadeUp 0.8s ease 1.85s forwards;
+}
+
+/* CTAs */
+.hero-actions {
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 2.05s forwards;
+}
+
+/* Scroll indicator — desktop only */
+.hero-scroll { display: none; }
+@media (min-width: 768px) {
+  .hero-scroll {
+    display: flex;
+    position: absolute;
+    bottom: 48px; left: 64px;
+    align-items: center;
+    gap: 16px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 2.6s forwards;
+  }
+}
+.hero-scroll-line {
+  width: 40px; height: 1px;
+  background: var(--m);
+  overflow: hidden;
+  position: relative;
+}
+.hero-scroll-line::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: var(--dk);
+  animation: scrollAnim 2.2s ease infinite 3s;
+}
+.hero-scroll span {
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--md);
+  font-weight: 300;
+}
+
+/* Large watermark number — desktop only */
+.hero-num { display: none; }
+@media (min-width: 1024px) {
+  .hero-num {
+    display: block;
+    position: absolute;
+    right: 64px; bottom: 120px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 180px;
+    font-weight: 300;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.04);
+    pointer-events: none;
+    user-select: none;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 2.2s forwards;
+  }
+}

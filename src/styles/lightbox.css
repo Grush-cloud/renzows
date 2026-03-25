@@ -1,0 +1,236 @@
+/* ── Lightbox Overlay ────────────────────────────────────────── */
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(10,10,10,0.97);
+  backdrop-filter: blur(18px);
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+.lb.open { opacity: 1; pointer-events: all; }
+
+/* Header */
+.lb-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  gap: 10px;
+  flex-wrap: wrap;
+}
+@media (min-width: 768px) { .lb-head { padding: 22px 40px; } }
+
+.lb-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 18px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.9);
+}
+
+.lb-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Filter tabs */
+.lb-filters { display: flex; gap: 4px; flex-wrap: wrap; }
+
+.lb-filter {
+  padding: 4px 11px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent;
+  color: rgba(255,255,255,0.45);
+  font-family: 'Jost', sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 300;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.lb-filter:hover { border-color: rgba(212,0,110,0.5); color: rgba(255,255,255,0.8); }
+.lb-filter.active { background: var(--m); border-color: var(--m); color: #fff; }
+
+/* Close button */
+.lb-close {
+  width: 34px; height: 34px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+.lb-close:hover { border-color: var(--m); color: var(--m); transform: rotate(90deg); }
+
+/* Scrollable body */
+.lb-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 18px 32px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212,0,110,0.4) transparent;
+}
+@media (min-width: 768px) { .lb-body { padding: 18px 40px 40px; } }
+.lb-body::-webkit-scrollbar { width: 3px; }
+.lb-body::-webkit-scrollbar-thumb { background: rgba(212,0,110,0.4); border-radius: 2px; }
+
+/* Count */
+.lb-count {
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  font-weight: 300;
+  margin-bottom: 14px;
+}
+.lb-count span { color: var(--m); }
+
+/* Grid */
+.lb-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+@media (min-width: 768px)  { .lb-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; } }
+@media (min-width: 1200px) { .lb-grid { grid-template-columns: repeat(4, 1fr); } }
+
+/* ── Base card ── */
+.lb-card {
+  position: relative;
+  overflow: hidden;
+  transform: translateY(22px);
+  opacity: 0;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.55s;
+}
+.lb-card.vis { transform: translateY(0); opacity: 1; }
+
+/* ── Video cards ── */
+.lb-card.lb-video {
+  background: var(--dk2);
+  aspect-ratio: 4 / 5;
+}
+.lb-card.lb-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lb-card.lb-video:hover video { transform: scale(1.06); }
+.lb-card.lb-video .lb-ph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: rgba(255,255,255,0.12);
+  background: linear-gradient(135deg, #111, #1c1c1c, #111);
+  background-size: 200% 200%;
+  animation: shimmer 4s ease infinite;
+}
+.lb-card.lb-video::before {
+  content: '';
+  position: absolute;
+  inset: 0; z-index: 1;
+  background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, transparent 52%);
+  pointer-events: none;
+}
+
+/* ── Image cards ── */
+.lb-card.lb-image {
+  background: transparent;
+  aspect-ratio: unset;
+  height: auto;
+}
+.lb-card.lb-image img {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: auto;
+  object-fit: unset;
+  display: block;
+}
+
+/* ── Info overlay — both types ── */
+.lb-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 2;
+  padding: 12px 12px 10px;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s;
+}
+.lb-card:hover .lb-info { transform: translateY(0); opacity: 1; }
+
+.lb-info-cat {
+  font-size: 7.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--m);
+  font-weight: 300;
+  margin-bottom: 3px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.lb-info-cat::before { content: ''; width: 9px; height: 1px; background: var(--m); }
+
+.lb-info-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.15;
+}
+
+/* ── Category badge ── */
+.lb-badge {
+  position: absolute;
+  top: 9px; right: 9px;
+  z-index: 3;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 3px 8px;
+  font-size: 7px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  font-weight: 300;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.lb-card:hover .lb-badge { opacity: 1; }
+
+/* ── Empty state ── */
+.lb-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 56px 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: rgba(255,255,255,0.2);
+}

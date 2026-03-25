@@ -1,0 +1,199 @@
+/* ── Google Fonts ─────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap');
+
+/* ── Design Tokens ────────────────────────────────────────────── */
+:root {
+  --m:   #D4006E;   /* magenta — brand accent */
+  --dk:  #181818;   /* near-black */
+  --dk2: #222222;
+  --md:  #666666;   /* mid grey */
+  --lt:  #F6F5F3;   /* off-white background */
+  --wh:  #ffffff;
+  --gr:  #E2E2DF;   /* light border grey */
+  --gr2: #CBCBC7;   /* slightly darker grey */
+}
+
+/* ── Reset ────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--wh);
+  color: var(--dk);
+  overflow-x: hidden;
+}
+
+/* ── Custom Cursor ────────────────────────────────────────────── */
+#cur, #cur2 {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+}
+#cur {
+  width: 7px;
+  height: 7px;
+  background: var(--m);
+  transform: translate(-50%, -50%);
+}
+#cur2 {
+  width: 30px;
+  height: 30px;
+  border: 1.5px solid var(--m);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s, height 0.4s, opacity 0.4s;
+  opacity: 0.55;
+}
+body.hov #cur2 { width: 48px; height: 48px; opacity: 0.35; }
+
+/* Hide cursor on touch devices */
+@media (pointer: coarse) {
+  #cur, #cur2 { display: none; }
+}
+
+/* ── Shared Typography ────────────────────────────────────────── */
+.label {
+  font-weight: 300;
+  font-size: 9.5px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--m);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.label::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--m);
+}
+
+.sec-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: clamp(30px, 4vw, 56px);
+  line-height: 1.07;
+  color: var(--dk);
+  margin-bottom: 24px;
+}
+.sec-title em { font-style: italic; color: var(--m); }
+
+.sec-body {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.92;
+  color: var(--md);
+}
+
+/* ── Shared Buttons ───────────────────────────────────────────── */
+.btn-fill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--dk);
+  color: var(--wh);
+  padding: 13px 30px;
+  text-decoration: none;
+  font-weight: 300;
+  font-size: 10.5px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+}
+.btn-fill::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: -100%;
+  background: var(--m);
+  transition: left 0.35s;
+  z-index: 0;
+}
+.btn-fill:hover::before { left: 0; }
+.btn-fill span { position: relative; z-index: 1; }
+
+.btn-ghost {
+  font-weight: 300;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dk);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.btn-ghost .arr { transition: transform 0.3s; }
+.btn-ghost:hover .arr { transform: translateX(7px); }
+
+/* ── Scroll Reveal ────────────────────────────────────────────── */
+.rv {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.rv.in  { opacity: 1; transform: translateY(0); }
+.rv.d1  { transition-delay: 0.1s; }
+.rv.d2  { transition-delay: 0.2s; }
+.rv.d3  { transition-delay: 0.3s; }
+.rv.d4  { transition-delay: 0.4s; }
+
+/* ── WhatsApp Float ── */
+.wa-float {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 300;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px rgba(37,211,102,0.35);
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: wa-pop 0.5s cubic-bezier(0.16,1,0.3,1) 3s both;
+}
+.wa-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 32px rgba(37,211,102,0.5);
+}
+.wa-float svg {
+  width: 28px;
+  height: 28px;
+  fill: #fff;
+}
+@keyframes wa-pop {
+  from { opacity: 0; transform: scale(0.5); }
+  to   { opacity: 1; transform: scale(1);   }
+}
+
+/* ── Shared Animations ────────────────────────────────────────── */
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.7); }
+}
+@keyframes tick {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
