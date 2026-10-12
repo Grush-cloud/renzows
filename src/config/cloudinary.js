@@ -7,12 +7,12 @@
  * Log into cloudinary.com → it's shown at the top of your dashboard.
  *
  * FOLDER STRUCTURE TO CREATE IN CLOUDINARY:
- * ┌── events/
+ * ┌── events/            (folder names must match CATS in src/constants/index.js)
  * │   ├── corporate/
- * │   ├── weddings/
- * │   ├── brand/
- * │   └── private/
- * └── sets/
+ * │   ├── wedding/
+ * │   ├── private/
+ * │   └── birthday/
+ * └── sets/              (folder names must match SETS_CATS in src/constants/sets.js)
  *     ├── portraits/
  *     ├── fashion/
  *     ├── commercial/

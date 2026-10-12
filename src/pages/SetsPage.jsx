@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { SETS_CATS, SETS_CAT_LABELS } from '../constants/sets'
 import { useVideoAutoplay } from '../hooks/useVideoAutoplay'
 import { useReveal } from '../hooks/useReveal'
+import Hero from '../components/Hero'
 import '../styles/sets.css'
 
 /**
@@ -9,13 +10,13 @@ import '../styles/sets.css'
  * Set design and Prop rentals
  *
  * @param {array}    projects  - sets project list from Cloudinary / demo
- * @param {function} onEnquire - scrolls to enquiry section
+ * @param {boolean}  loading   - true while Cloudinary fetch is in progress
  */
-export default function SetsPage({ projects }) {
+export default function SetsPage({ projects, loading }) {
   const [filter, setFilter] = useState('all')
 
-  useReveal()
-  useVideoAutoplay()
+  useReveal([projects, filter])
+  useVideoAutoplay([projects, filter])
 
   const filtered = filter === 'all'
     ? projects
@@ -24,38 +25,7 @@ export default function SetsPage({ projects }) {
   return (
     <div className="sets-page">
 
-      {/* ── Hero ── */}
-      <section className="sets-hero" id="home">
-        <div className="sets-hero-mesh" />
-        <div className="sets-hero-petal" />
-
-        <p className="sets-hero-tag">Set Design &amp; Prop Rentals</p>
-
-        <h1 className="sets-hero-h1">
-          <span className="sets-hero-line a1">Every frame</span>
-          <span className="sets-hero-line a2">deserves a <em>set</em></span>
-          <span className="sets-hero-line a3">worth shooting.</span>
-        </h1>
-
-        <p className="sets-hero-sub">
-          Bespoke sets and curated prop rentals for photographers,
-          creatives, and brands who refuse to settle for ordinary backdrops.
-        </p>
-
-        <div className="sets-hero-actions">
-          <a href="#enquire" className="btn-sets">
-            <span>Book a Set</span>
-          </a>
-          <a href="#work" className="btn-ghost">
-            See the work <span className="arr">→</span>
-          </a>
-        </div>
-
-        <div className="sets-hero-scroll">
-          <div className="sets-hero-scroll-line" />
-          <span>Scroll to explore</span>
-        </div>
-      </section>
+      <Hero brand="sets" />
 
       {/* ── Intro strip ── */}
       <section className="sets-intro">
@@ -110,7 +80,7 @@ export default function SetsPage({ projects }) {
         </div>
 
         <div className="sets-grid">
-          {filtered.length === 0 && (
+          {!loading && filtered.length === 0 && (
             <p className="sets-empty">No projects in this category yet.</p>
           )}
       {filtered.map((project, i) => (
@@ -127,12 +97,12 @@ export default function SetsPage({ projects }) {
       />
     )}
               {project.url && project.type === 'video' && (
-                <video autoPlay muted loop playsInline preload="none" data-src={project.url} />
+                <video autoPlay muted loop playsInline preload="none" poster={project.poster} data-src={project.url} />
               )}
 
               {/* Info on hover */}
               <div className="sets-tile-info">
-                <p className="sets-tile-cat">{SETS_CAT_LABELS[project.cat]}</p>
+                <p className="sets-tile-cat">{SETS_CAT_LABELS[project.cat] ?? project.cat}</p>
                 <p className="sets-tile-name">{project.name}</p>
               </div>
             </div>

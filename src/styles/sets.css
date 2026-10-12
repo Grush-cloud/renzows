@@ -10,121 +10,6 @@
   --s-warm: #F7F4F9;  /* very faint purple tint */
 }
 
-/* ── Hero ────────────────────────────────────────────────────── */
-.sets-hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  padding: 120px 24px 80px;
-  overflow: hidden;
-  background: var(--s-warm);
-}
-@media (min-width: 768px) { .sets-hero { padding: 140px 64px 100px; } }
-
-/* Gradient mesh background */
-.sets-hero-mesh {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(194,0,106,0.08) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 60% at 20% 80%, rgba(107,47,160,0.07) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-/* Decorative petal echo from logo — desktop only */
-.sets-hero-petal {
-  display: none;
-}
-@media (min-width: 1024px) {
-  .sets-hero-petal {
-    display: block;
-    position: absolute;
-    right: -40px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 480px;
-    height: 480px;
-    opacity: 0.06;
-    background: var(--sg);
-    border-radius: 50% 0 50% 50%;
-    filter: blur(2px);
-  }
-}
-
-.sets-hero-tag {
-  font-weight: 300;
-  font-size: 9.5px;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  background: var(--sg);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 28px;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 0.9s forwards;
-}
-.sets-hero-tag::before {
-  content: '';
-  width: 20px;
-  height: 1px;
-  background: var(--sg);
-  flex-shrink: 0;
-  -webkit-text-fill-color: initial;
-}
-
-.sets-hero-h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 300;
-  font-size: clamp(48px, 11vw, 128px);
-  line-height: 0.92;
-  letter-spacing: -0.025em;
-  color: var(--dk);
-  max-width: 900px;
-}
-.sets-hero-h1 em {
-  font-style: italic;
-  background: var(--sg);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.sets-hero-line {
-  display: block;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(60px);
-}
-.sets-hero-line.a1 { animation: lineReveal 0.95s cubic-bezier(0.16,1,0.3,1) 1.05s forwards; }
-.sets-hero-line.a2 { animation: lineReveal 0.95s cubic-bezier(0.16,1,0.3,1) 1.22s forwards; }
-.sets-hero-line.a3 { animation: lineReveal 0.95s cubic-bezier(0.16,1,0.3,1) 1.39s forwards; }
-
-.sets-hero-sub {
-  margin-top: 32px;
-  max-width: 420px;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 1.88;
-  color: var(--md);
-  opacity: 0;
-  animation: fadeUp 0.8s ease 1.85s forwards;
-}
-
-.sets-hero-actions {
-  margin-top: 40px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 24px;
-  opacity: 0;
-  animation: fadeUp 0.8s ease 2.05s forwards;
-}
-
 /* Gradient fill button for Sets */
 .btn-sets {
   display: inline-flex;
@@ -135,7 +20,7 @@
   padding: 13px 30px;
   text-decoration: none;
   font-weight: 300;
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   border: none;
@@ -145,33 +30,6 @@
   transition: opacity 0.3s;
 }
 .btn-sets:hover { opacity: 0.88; }
-
-/* Scroll indicator */
-.sets-hero-scroll { display: none; }
-@media (min-width: 768px) {
-  .sets-hero-scroll {
-    display: flex;
-    position: absolute;
-    bottom: 48px; left: 64px;
-    align-items: center;
-    gap: 16px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease 2.6s forwards;
-  }
-  .sets-hero-scroll-line {
-    width: 40px; height: 1px;
-    background: var(--sg);
-    overflow: hidden;
-    position: relative;
-  }
-  .sets-hero-scroll span {
-    font-size: 9.5px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--md);
-    font-weight: 300;
-  }
-}
 
 /* ── What We Do (brief intro strip) ─────────────────────────── */
 .sets-intro {
@@ -241,7 +99,7 @@
   border: 1px solid transparent;
   background: linear-gradient(var(--wh), var(--wh)) padding-box,
               var(--sg) border-box;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 300;
@@ -283,7 +141,7 @@
   background: transparent;
   color: var(--md);
   font-family: 'Jost', sans-serif;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 300;
@@ -371,7 +229,7 @@
 .sets-tile:hover .sets-tile-info { transform: translateY(0); opacity: 1; }
 
 .sets-tile-cat {
-  font-size: 7.5px;
+  font-size: 11px;
   letter-spacing: 0.26em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.7);
@@ -452,7 +310,7 @@
 }
 
 .sets-enquiry-label {
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   background: linear-gradient(135deg, #C2006A, #9B2D8E, #6B2FA0);
@@ -490,7 +348,7 @@
 .sets-enquiry-sub {
   font-size: 14px;
   font-weight: 300;
-  color: rgba(255,255,255,0.42);
+  color: rgba(255,255,255,0.7);
   line-height: 1.88;
   max-width: 400px;
   margin-bottom: 36px;
@@ -503,7 +361,7 @@
   gap: 18px;
 }
 .sets-cd-label {
-  font-size: 8.5px;
+  font-size: 11px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
   background: linear-gradient(135deg, #C2006A, #6B2FA0);
@@ -550,10 +408,10 @@
 .sets-fg { margin-bottom: 18px; }
 .sets-fg label {
   display: block;
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.65);
   font-weight: 300;
   margin-bottom: 7px;
 }
@@ -596,7 +454,7 @@
   padding: 14px 0;
   font-family: 'Jost', sans-serif;
   font-weight: 300;
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.17em;
   text-transform: uppercase;
   cursor: pointer;
@@ -618,81 +476,48 @@
   gap: 7px;
 }
 
-/* Permanent breathing explore label */
-.brand-explore-label {
-  font-family: 'Jost', sans-serif;
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-weight: 300;
-  white-space: nowrap;
-  pointer-events: none;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
 
-/* Dot */
-.brand-explore-label::before {
-  content: '';
-  display: inline-block;
-  width: 5px;
-  height: 5px;
+/* Phones: tighter pill so stacked logo + switcher + burger fit at 360px */
+@media (max-width: 767px) { .brand-switcher-btn { padding: 6px 12px; } }
+
+/* ── SetsByRenzows nudge ─────────────────────────────────────── */
+.brand-switcher-btn { position: relative; }
+.sets-dot {
+  position: absolute;
+  top: 3px; right: 5px;
+  width: 6px; height: 6px;
   border-radius: 50%;
-  flex-shrink: 0;
-}
-
-/* Events page → pointing to Sets — pink-purple gradient, breathing light to vivid */
-.brand-explore-label.to-sets {
-  background: linear-gradient(135deg, #C2006A, #9B2D8E, #6B2FA0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: breathe-sets 2.8s ease-in-out infinite;
-}
-.brand-explore-label.to-sets::before {
-  background: linear-gradient(135deg, #C2006A, #6B2FA0);
-  animation: breathe-dot 2.8s ease-in-out infinite;
-}
-
-/* Sets page → pointing to Events — magenta, breathing light to vivid */
-.brand-explore-label.to-events {
-  color: var(--m);
-  animation: breathe-events 2.8s ease-in-out infinite;
-}
-.brand-explore-label.to-events::before {
   background: var(--m);
-  animation: breathe-dot 2.8s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(212,0,110,0.6);
+  animation: sets-ping 2.8s ease-out infinite;
+}
+@keyframes sets-ping {
+  0%   { box-shadow: 0 0 0 0 rgba(212,0,110,0.6); }
+  70%  { box-shadow: 0 0 0 5px rgba(212,0,110,0); }
+  100% { box-shadow: 0 0 0 0 rgba(212,0,110,0); }
 }
 
-@keyframes breathe-sets {
-  0%, 100% {
-    opacity: 0.25;
-    filter: brightness(1.8);
-  }
-  50% {
-    opacity: 1;
-    filter: brightness(1);
-  }
+.sets-hint {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  white-space: nowrap;
+  padding: 6px 10px;
+  background: rgba(8,8,8,0.85);
+  color: var(--wh);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.25s, transform 0.25s;
 }
-
-@keyframes breathe-events {
-  0%, 100% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes breathe-dot {
-  0%, 100% { opacity: 0.2; transform: scale(0.7); }
-  50%       { opacity: 1;   transform: scale(1);   }
-}
-
-/* Hide on very small screens */
-@media (max-width: 520px) { .brand-explore-label { display: none; } }
+.brand-switcher-btn:hover .sets-hint,
+.brand-switcher-btn:focus-visible .sets-hint { opacity: 1; transform: translateY(0); }
+/* The hint is for the other brand only */
+.brand-switcher-btn.active-events .sets-hint,
+.brand-switcher-btn.active-sets .sets-hint { display: none; }
 
 .brand-switcher {
   display: flex;
@@ -710,7 +535,7 @@
   border: none;
   background: transparent;
   font-family: 'Jost', sans-serif;
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-weight: 300;

@@ -14,7 +14,7 @@ export default function Founder() {
 
       {/* Left — photo */}
       <div className="founder-img rv">
-        <img src="/founder.jpg" alt="Founder, Renzow's Event Design" />
+        <img src="/founder.jpg" alt="Founder, Renzows Event Design" />
 
         {/* Floating quote card */}
         <div className="founder-qcard rv d2">

@@ -40,7 +40,6 @@ renzows-event-design/
 │   │   │   └── Lightbox.jsx     # Full-screen overlay with filters
 │   │   ├── About.jsx
 │   │   ├── Contact.jsx
-│   │   ├── Cursor.jsx           # Custom magenta cursor
 │   │   ├── Footer.jsx
 │   │   ├── Founder.jsx          # Owner bio section
 │   │   ├── Hero.jsx

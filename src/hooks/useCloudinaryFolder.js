@@ -16,51 +16,49 @@ import { useState, useEffect } from 'react'
  *
  * @param {string} cloudName - your Cloudinary cloud name
  * @param {string} tag       - "renzows-events" or "renzows-sets"
- * @param {array}  fallback  - demo data shown if fetch fails
  */
-export function useCloudinaryFolder(cloudName, tag, fallback = []) {
+export function useCloudinaryFolder(cloudName, tag) {
   const [assets, setAssets]   = useState([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(Boolean(cloudName))
   const [error, setError]     = useState(null)
 
   useEffect(() => {
-    if (!cloudName || cloudName === 'YOUR_CLOUD_NAME') return
+    if (!cloudName) return
+
+    // Cloudinary answers 404 when no asset of that type has the tag — treat as empty
+    const list = (type) =>
+      fetch(`https://res.cloudinary.com/${cloudName}/${type}/list/${tag}.json`)
+        .then((r) => (r.ok ? r.json() : { resources: [] }))
 
     setLoading(true)
 
-    Promise.all([
-      fetch(`https://res.cloudinary.com/${cloudName}/image/list/${tag}.json`)
-        .then((r) => r.json())
-        .catch(() => ({ resources: [] })),
-      fetch(`https://res.cloudinary.com/${cloudName}/video/list/${tag}.json`)
-        .then((r) => r.json())
-        .catch(() => ({ resources: [] })),
-    ])
+    Promise.all([list('image'), list('video')])
       .then(([imageData, videoData]) => {
         const all = [
           ...(imageData.resources || []),
           ...(videoData.resources || []),
         ]
 
-        const mapped = all.map((r) => {
+        setAssets(all.map((r) => {
           const parts   = (r.asset_folder || '').split('/')
           const cat     = parts.length > 1 ? parts[parts.length - 1] : 'other'
           const isVideo = ['mp4', 'mov', 'webm', 'avi'].includes(r.format)
+          const base    = `https://res.cloudinary.com/${cloudName}/${isVideo ? 'video' : 'image'}/upload`
+          // Videos: an 8s, 480px loop, not the full original (5–16 MB each on mobile data)
           const url     = isVideo
-            ? `https://res.cloudinary.com/${cloudName}/video/upload/q_auto/${r.public_id}.${r.format}`
-            : `https://res.cloudinary.com/${cloudName}/image/upload/q_auto,f_auto/${r.public_id}.${r.format}`
+            ? `${base}/so_0,eo_8,w_480,q_auto/${r.public_id}.mp4`
+            : `${base}/q_auto,f_auto/${r.public_id}.${r.format}`
+          // First frame as a still, so tiles are never a black box while the video loads
+          const poster  = isVideo ? `${base}/so_0,w_480,q_auto,f_auto/${r.public_id}.jpg` : undefined
           const name    = r.context?.custom?.name
                         || r.public_id.split('/').pop().replace(/[-_]/g, ' ')
 
-          return { id: r.asset_id, name, cat, url, type: isVideo ? 'video' : 'image' }
-        })
-
-        setAssets(mapped.length > 0 ? mapped : fallback)
+          return { id: r.asset_id, name, cat, url, poster, type: isVideo ? 'video' : 'image' }
+        }))
       })
       .catch((err) => {
-        console.warn('Cloudinary fetch failed — using demo content:', err.message)
+        console.warn('Cloudinary fetch failed:', err.message)
         setError(err.message)
-        setAssets(fallback)
       })
       .finally(() => setLoading(false))
   }, [cloudName, tag])

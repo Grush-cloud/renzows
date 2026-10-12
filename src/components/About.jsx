@@ -5,7 +5,6 @@ export default function About() {
       {/* Left — dark quote panel */}
       <div className="about-dark">
         <div className="about-grid" />
-        <div className="about-ghost">RED</div>
         <div style={{ position: 'relative', zIndex: 1 }}>
           <div className="about-mark" />
           <p className="about-quote">

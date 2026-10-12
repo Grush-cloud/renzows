@@ -1,17 +1,17 @@
 import { useState } from 'react'
 import PublicSite  from './pages/PublicSite'
 import SetsPage    from './pages/SetsPage'
-import Cursor      from './components/Cursor'
 import Nav         from './components/Nav'
 import Footer      from './components/Footer'
+import Intro       from './components/Intro'
 import { useCloudinaryFolder } from './hooks/useCloudinaryFolder'
 import { CLOUD_NAME }          from './config/cloudinary'
 
 export default function App() {
   const [brand, setBrand] = useState('events')
 
-  const { assets: eventProjects, loading: eventsLoading } = useCloudinaryFolder(CLOUD_NAME, 'renzows-events', [])
-  const { assets: setsProjects,  loading: setsLoading   } = useCloudinaryFolder(CLOUD_NAME, 'renzows-sets',   [])
+  const { assets: eventProjects, loading: eventsLoading } = useCloudinaryFolder(CLOUD_NAME, 'renzows-events')
+  const { assets: setsProjects,  loading: setsLoading   } = useCloudinaryFolder(CLOUD_NAME, 'renzows-sets')
 
   function handleBrandSwitch(newBrand) {
     setBrand(newBrand)
@@ -20,7 +20,8 @@ export default function App() {
 
   return (
     <>
-      <Cursor />
+      {/* First entry to each brand per session: red carpet (events) / puzzle (sets) */}
+      <Intro key={brand} brand={brand} />
       <Nav
         activeBrand={brand}
         onSwitchBrand={handleBrandSwitch}

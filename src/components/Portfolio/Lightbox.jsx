@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { CATS, CAT_LABELS } from '../../constants'
 
 /**
  * Lightbox — full-screen overlay showing all projects.
- * Filterable by category. Videos autoplay on open.
+ * Filterable by category. Videos play only while it is open.
  *
  * @param {boolean}  open      - controls visibility
  * @param {function} onClose   - called when user closes
@@ -11,6 +11,7 @@ import { CATS, CAT_LABELS } from '../../constants'
  */
 export default function Lightbox({ open, onClose, projects }) {
   const [filter, setFilter] = useState('all')
+  const ref = useRef(null)
 
   const filtered = filter === 'all'
     ? projects
@@ -18,10 +19,11 @@ export default function Lightbox({ open, onClose, projects }) {
 
   // Close on Escape
   useEffect(() => {
+    if (!open) return
     const onKey = (e) => { if (e.key === 'Escape') onClose() }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [onClose])
+  }, [open, onClose])
 
   // Lock body scroll while open
   useEffect(() => {
@@ -29,22 +31,27 @@ export default function Lightbox({ open, onClose, projects }) {
     return () => { document.body.style.overflow = '' }
   }, [open])
 
-  // Autoplay visible videos when lightbox opens
+  // Play videos while open, pause them all on close
   useEffect(() => {
-    if (!open) return
-    // Small delay so DOM has rendered
-    const t = setTimeout(() => {
-      document.querySelectorAll('.lb-card video').forEach((v) => {
-        if (!v.src && v.dataset.src) v.src = v.dataset.src
-        v.play().catch(() => {})
-      })
-    }, 100)
-    return () => clearTimeout(t)
+    const videos = ref.current.querySelectorAll('video')
+    if (!open) {
+      videos.forEach((v) => v.pause())
+      return
+    }
+    videos.forEach((v) => {
+      if (!v.src && v.dataset.src) v.src = v.dataset.src
+      v.play().catch(() => {})
+    })
   }, [open, filter])
 
   return (
     <div
+      ref={ref}
       className={`lb ${open ? 'open' : ''}`}
+      role="dialog"
+      aria-modal="true"
+      aria-label="All projects"
+      aria-hidden={!open}
       onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
     >
       {/* Header */}
@@ -82,6 +89,7 @@ export default function Lightbox({ open, onClose, projects }) {
 
           {filtered.map((project, i) => {
             const isVideo = project.type === 'video'
+            const label   = CAT_LABELS[project.cat] ?? project.cat
             return (
               <div
                 key={project.id}
@@ -92,31 +100,23 @@ export default function Lightbox({ open, onClose, projects }) {
 
                 {project.url && isVideo && (
                   <video
-                    autoPlay
                     muted
                     loop
                     playsInline
                     preload="none"
+                    poster={project.poster}
                     data-src={project.url}
                   />
                 )}
 
-            {project.url && !isVideo && (
-  <img
-    src={project.url}
-    alt={project.name}
-    loading="lazy"
-    onLoad={(e) => {
-      const ph = e.target.closest('.lb-card').querySelector('.lb-ph')
-      if (ph) ph.style.opacity = '0'
-    }}
-  />
-)}
+                {project.url && !isVideo && (
+                  <img src={project.url} alt={project.name} loading="lazy" />
+                )}
 
-                <span className="lb-badge">{CAT_LABELS[project.cat]}</span>
+                <span className="lb-badge">{label}</span>
 
                 <div className="lb-info">
-                  <p className="lb-info-cat">{CAT_LABELS[project.cat]}</p>
+                  <p className="lb-info-cat">{label}</p>
                   <p className="lb-info-name">{project.name}</p>
                 </div>
               </div>

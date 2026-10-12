@@ -9,20 +9,6 @@ export const CAT_LABELS = {
   birthday:   'Birthday',
 }
 
-// ─── Demo Projects (shown until Cloudinary is configured) ────────
-// Once CLOUD_NAME is set in src/config/cloudinary.js these are
-// replaced automatically by live Cloudinary assets.
-export const DEMO_PROJECTS = [
-  { id: 'p1', name: 'The Grand Gala 2024',  cat: 'corporate', url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',                    type: 'video' },
-  { id: 'p2', name: 'Elise & Marcus',       cat: 'wedding',   url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',                  type: 'video' },
-  { id: 'p3', name: 'Verde Launch',         cat: 'private',     url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',                 type: 'video' },
-  { id: 'p4', name: "Sofia's Gala",         cat: 'Birthday',   url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',                     type: 'video' },
-  { id: 'p5', name: 'Nexus Annual Summit',  cat: 'corporate', url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',                   type: 'video' },
-  { id: 'p6', name: 'Amara & David',        cat: 'wedding',   url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',                type: 'video' },
-  { id: 'p7', name: 'Luxe Pop-Up',          cat: 'brand',     url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',               type: 'video' },
-  { id: 'p8', name: 'Horizon Awards',       cat: 'corporate', url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4',     type: 'video' },
-]
-
 // ─── Nav Links ───────────────────────────────────────────────────
 export const NAV_LINKS = [
   { href: '#about',    label: 'About'     },

@@ -1,3 +1,5 @@
+import Logo from './Logo'
+
 /**
  * Footer — shared across both brands.
  * Copy and links adapt based on which brand is active.
@@ -10,14 +12,25 @@ export default function Footer({ activeBrand = 'events' }) {
   return (
     <footer>
       <div className="foot-logo">
-        <span className="nav-mark" style={{ pointerEvents: 'none' }} />
-        {isEvents ? "RenzowsEventDesign" : 'SetsByRenzows'}
+        {isEvents ? <Logo /> : (
+          <><span className="nav-mark" style={{ pointerEvents: 'none' }} />SetsByRenzows</>
+        )}
       </div>
 
       <p className="foot-copy">
-        © {new Date().getFullYear()} RenzowsEventDesign.
-        {!isEvents && ' SetsByRenzows is a sub-brand of RenzowsEventDesign.'}
+        © {new Date().getFullYear()} Renzows Event Design.
+        {!isEvents && " SetsByRenzows is a sub-brand of Renzows Event Design."}
         {' '}All rights reserved.
+        {' '}
+        <button
+          className="foot-replay"
+          onClick={() => {
+            window.scrollTo({ top: 0, behavior: 'instant' })
+            window.dispatchEvent(new Event('rz-replay-intro'))   // heard by Intro.jsx
+          }}
+        >
+          ↺ Replay intro
+        </button>
       </p>
 
       <ul className="foot-links">

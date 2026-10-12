@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { NAV_LINKS } from '../constants'
+import Logo from './Logo'
 
 /**
  * Nav — shared across both RenzowsEventDesign and SetsByRenzows.
@@ -8,7 +9,7 @@ import { NAV_LINKS } from '../constants'
  * - Sticks on scroll with frosted background
  * - Hamburger + drawer for mobile
  * - Brand switcher pill (Events ↔ Sets)
- * - Breathing explore badge pointing to the other brand
+ * - Cross-brand nudge: a small dot + hover hint on the brand you're not on
  *
  * @param {string}   activeBrand   - 'events' | 'sets'
  * @param {function} onSwitchBrand - called with 'events' or 'sets'
@@ -23,10 +24,8 @@ export default function Nav({ activeBrand = 'events', onSwitchBrand }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  function handleSwitch(brand) {
-    onSwitchBrand(brand)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+  const handleSwitch = onSwitchBrand
+
 
   const links = activeBrand === 'events'
     ? NAV_LINKS
@@ -35,18 +34,17 @@ export default function Nav({ activeBrand = 'events', onSwitchBrand }) {
         { href: '#enquire', label: 'Enquire'   },
       ]
 
-  const exploreLabel = activeBrand === 'events'
-    ? { text: 'Explore SetsByRenzows', cls: 'to-sets' }
-    : { text: "Explore RenzowsEventDesign", cls: 'to-events' }
 
   return (
     <>
-      <nav className={stuck ? 'stuck' : ''}>
+      {/* Light text while floating over the dark heroes (both brands) */}
+      <nav className={stuck ? 'stuck' : !drawerOpen ? 'on-dark' : ''}>
 
         {/* Logo */}
         <a href="#" className="nav-logo">
-          <span className="nav-mark" style={{ cursor: 'default' }} />
-          {activeBrand === 'events' ? "RenzowsEventDesign" : 'SetsByRenzows'}
+          {activeBrand === 'events' ? <Logo /> : (
+            <><span className="nav-mark" style={{ cursor: 'default' }} />SetsByRenzows</>
+          )}
         </a>
 
         {/* Desktop links */}
@@ -56,7 +54,7 @@ export default function Nav({ activeBrand = 'events', onSwitchBrand }) {
           ))}
         </ul>
 
-        {/* Right — switcher + explore badge */}
+        {/* Right — brand switcher + burger */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
 
           <div className="brand-switcher-wrap">
@@ -64,21 +62,22 @@ export default function Nav({ activeBrand = 'events', onSwitchBrand }) {
               <button
                 className={`brand-switcher-btn ${activeBrand === 'events' ? 'active-events' : ''}`}
                 onClick={() => handleSwitch('events')}
+                title="Renzows Event Design — weddings, birthdays & corporate events"
               >
                 Events
+                {activeBrand === 'sets' && <span className="sets-dot" aria-hidden="true" />}
+                <span className="sets-hint" aria-hidden="true">Weddings, birthdays &amp; corporate events</span>
               </button>
               <button
                 className={`brand-switcher-btn ${activeBrand === 'sets' ? 'active-sets' : ''}`}
                 onClick={() => handleSwitch('sets')}
+                title="SetsByRenzows — photoshoot sets & prop rentals"
               >
                 Sets
+                {activeBrand === 'events' && <span className="sets-dot" aria-hidden="true" />}
+                <span className="sets-hint" aria-hidden="true">Photoshoot sets &amp; prop rentals</span>
               </button>
             </div>
-
-            {/* Permanently breathing explore label */}
-            <span className={`brand-explore-label ${exploreLabel.cls}`}>
-              {exploreLabel.text}
-            </span>
           </div>
 
           {/* Mobile hamburger */}
@@ -117,7 +116,7 @@ export default function Nav({ activeBrand = 'events', onSwitchBrand }) {
                 setDrawerOpen(false)
               }}
             >
-              {activeBrand === 'events' ? '→ SetsByRenzows' : "→ RenzowsEventDesign"}
+              {activeBrand === 'events' ? '→ SetsByRenzows' : "→ Renzows Event Design"}
             </button>
           </li>
         </ul>

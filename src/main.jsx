@@ -9,6 +9,7 @@ import './styles/sections.css'
 import './styles/portfolio.css'
 import './styles/lightbox.css'
 import './styles/sets.css'
+import './styles/intro.css'
 
 import App from './App.jsx'
 

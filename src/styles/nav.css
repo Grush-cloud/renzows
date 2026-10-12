@@ -14,6 +14,7 @@ nav {
 nav.stuck {
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom-color: var(--gr);
   padding: 14px 24px;
 }
@@ -32,6 +33,9 @@ nav.stuck {
   align-items: center;
   gap: 8px;
 }
+/* Stacked logo shrinks a little once the bar sticks */
+.nav-logo .logo { transition: transform 0.4s; transform-origin: left center; }
+nav.stuck .nav-logo .logo { transform: scale(0.82); margin: -6px 0; }
 
 /* The magenta corner mark */
 .nav-mark {
@@ -54,7 +58,7 @@ nav.stuck {
 
 .nav-links a {
   font-weight: 300;
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--dk);
@@ -139,3 +143,29 @@ nav.stuck {
   transition: opacity 0.3s;
 }
 .nav-overlay.open { opacity: 1; pointer-events: all; }
+
+/* Over the dark events hero (before the nav sticks):
+   a soft dark band behind the bar so links never dissolve into the video */
+nav.on-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 -48px 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(8,8,8,0.78) 0%, rgba(8,8,8,0.45) 60%, transparent 100%);
+}
+nav.on-dark .nav-logo,
+nav.on-dark .nav-links a { color: var(--wh); text-shadow: 0 1px 10px rgba(0,0,0,0.55); }
+nav.on-dark .nav-links a { font-weight: 400; }
+nav.on-dark .nav-burger span { background: var(--wh); box-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+nav.on-dark .brand-switcher {
+  background: rgba(8,8,8,0.5);
+  border-color: rgba(255,255,255,0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+nav.on-dark .brand-switcher-btn { color: var(--wh); }
+nav.on-dark .brand-switcher-btn.active-events { background: var(--wh); color: var(--dk); }
+nav.on-dark .brand-switcher-btn.active-sets { background: linear-gradient(135deg, #C2006A, #6B2FA0); color: var(--wh); box-shadow: none; }
+/* Small phones: the plain-text Sets wordmark needs a little room next to the switcher */
+@media (max-width: 400px) { .nav-logo { letter-spacing: 0.1em; margin-right: 8px; } }

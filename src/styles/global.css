@@ -1,6 +1,3 @@
-/* ── Google Fonts ─────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400&display=swap');
-
 /* ── Design Tokens ────────────────────────────────────────────── */
 :root {
   --m:   #D4006E;   /* magenta — brand accent */
@@ -22,6 +19,12 @@
 
 html { scroll-behavior: smooth; }
 
+/* Keep section headings clear of the fixed nav when jumping to #anchors */
+section[id] { scroll-margin-top: 96px; }
+
+/* Visible keyboard focus everywhere */
+:focus-visible { outline: 2px solid var(--m); outline-offset: 3px; }
+
 body {
   font-family: 'Jost', sans-serif;
   background: var(--wh);
@@ -29,38 +32,10 @@ body {
   overflow-x: hidden;
 }
 
-/* ── Custom Cursor ────────────────────────────────────────────── */
-#cur, #cur2 {
-  position: fixed;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-}
-#cur {
-  width: 7px;
-  height: 7px;
-  background: var(--m);
-  transform: translate(-50%, -50%);
-}
-#cur2 {
-  width: 30px;
-  height: 30px;
-  border: 1.5px solid var(--m);
-  transform: translate(-50%, -50%);
-  transition: width 0.4s, height 0.4s, opacity 0.4s;
-  opacity: 0.55;
-}
-body.hov #cur2 { width: 48px; height: 48px; opacity: 0.35; }
-
-/* Hide cursor on touch devices */
-@media (pointer: coarse) {
-  #cur, #cur2 { display: none; }
-}
-
 /* ── Shared Typography ────────────────────────────────────────── */
 .label {
   font-weight: 300;
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--m);
@@ -103,7 +78,7 @@ body.hov #cur2 { width: 48px; height: 48px; opacity: 0.35; }
   padding: 13px 30px;
   text-decoration: none;
   font-weight: 300;
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   position: relative;
@@ -115,17 +90,17 @@ body.hov #cur2 { width: 48px; height: 48px; opacity: 0.35; }
   content: '';
   position: absolute;
   inset: 0;
-  left: -100%;
+  transform: translateX(-100%);
   background: var(--m);
-  transition: left 0.35s;
+  transition: transform 0.35s;
   z-index: 0;
 }
-.btn-fill:hover::before { left: 0; }
+.btn-fill:hover::before { transform: translateX(0); }
 .btn-fill span { position: relative; z-index: 1; }
 
 .btn-ghost {
   font-weight: 300;
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--dk);
@@ -196,4 +171,54 @@ body.hov #cur2 { width: 48px; height: 48px; opacity: 0.35; }
 @keyframes tick {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
+}
+
+/* ── Reduced Motion ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+  .rv { opacity: 1; transform: none; }
+}
+
+/* ── Logo ─────────────────────────────────────────────────────── */
+.logo {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 8px 12px 9px;
+  border: 1px solid currentColor;   /* fallback where color-mix isn't supported */
+  border: 1px solid color-mix(in srgb, currentColor 45%, transparent);
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  line-height: 1;
+}
+.logo-l1 { font-size: 17px; letter-spacing: 0.08em; margin-right: -0.08em; text-align: center; }
+.logo-spread {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10.5px;
+  margin-top: 4px;
+}
+/* Magenta bracket over the bottom-right corner */
+.logo::after {
+  content: '';
+  position: absolute;
+  right: -4px; bottom: -4px;
+  width: 42%; height: 50%;
+  border-right: 2px solid var(--m);
+  border-bottom: 2px solid var(--m);
+}
+
+/* ── Older browsers without aspect-ratio (iOS < 15) ─────────────── */
+/* Video tiles size from aspect-ratio alone; give them height the old way */
+@supports not (aspect-ratio: 1) {
+  .sets-tile.sets-video::after { content: ''; display: block; padding-top: 133.33%; }
+  .lb-card.lb-video::after     { content: ''; display: block; padding-top: 125%; }
 }
