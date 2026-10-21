@@ -54,10 +54,10 @@ export default function Contact() {
           <label>Event Type</label>
           <select defaultValue="">
             <option value="" disabled>Select event type</option>
-            <option>Corporate Event</option>
             <option>Wedding</option>
-            <option>Brand Activation</option>
-            <option>Private Celebration</option>
+            <option>Birthday / Milestone</option>
+            <option>Corporate / Brand Event</option>
+            <option>Private Dinner / Gathering</option>
             <option>Other</option>
           </select>
         </div>

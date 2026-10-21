@@ -130,7 +130,7 @@
   gap: 2px;
 }
 @media (min-width: 640px)  { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1024px) { .svc-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1200px) { .svc-grid { grid-template-columns: repeat(4, 1fr); } }
 
 .svc-card {
   background: var(--wh);
@@ -528,3 +528,21 @@ footer {
   cursor: pointer;
 }
 .foot-replay:hover { color: var(--m); }
+
+.svc-more {
+  margin-top: 32px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--dk);
+}
+.svc-more a {
+  font-family: 'Jost', sans-serif;
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--m);
+  text-decoration: none;
+  white-space: nowrap;
+}

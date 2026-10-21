@@ -59,6 +59,8 @@ Verdict: the site reads as an AI template. The fix is real, specific content and
 - [x] Headline "We turn rooms into nights people talk about." + plain what-we-do line; tag "Event Design & Décor · Nigeria"
 - [x] One primary CTA "Plan Your Event"; unconfirmed stats removed from the hero
 - [x] Real logo recreated (`Logo.jsx`, bold) in nav + footer; brand spelled RENZOWS everywhere
+- [x] SetsByRenzows logo recreated (`SetsLogo.jsx`: petal fan + small-caps name + "Set design and prop rentals") in nav + footer on Sets; tab icon switches to the petal fan on Sets (`favicon-sets.svg`)
+- [ ] Swap both recreated logos for the original artwork (SVG/high-res PNG) when available
 - [x] Nav readable over video: dark band behind the bar, glass switcher, "Explore…" label removed
 - [x] Cross-brand nudge both ways: small dot + hover hint on whichever brand you're not on; switcher back on phones
 - [x] Sets hero = same component as Events (`Hero.jsx`, `brand="sets"`): three slowed clips of the floral disco set (no people in frame), aubergine tint, white nav, no tag line
@@ -74,6 +76,15 @@ Verdict: the site reads as an AI template. The fix is real, specific content and
 - [x] Once per brand per browser session; tap/click/any key skips; off for reduced-motion; hero animations wait for it
 - [x] "↺ Replay intro" button in the footer (plays the current brand's intro on request)
 - [ ] Watch it on a real phone; if it feels long, trim DURATION in Intro.jsx + the intro.css delays
+
+## 3b++. Cursor (`Cursor.jsx`)
+- [x] Brand dot + short ✦ sparkle trail; ring over links/buttons/tiles; lilac on Sets; mouse only, off for reduced-motion; native caret in form fields
+- [x] Touch screens: small ✦ burst where you tap (never delays the tap)
+
+## 3b+++. Services broadened
+- [x] Cards now match the real portfolio: Weddings & Receptions · Birthdays & Milestones · Corporate & Brand Events · Private Dinners & Gatherings
+- [x] "Don't see your occasion?" line + link to contact; ticker and contact-form event types updated to match
+- [ ] Owner to confirm the service wording (and add any service they offer that isn't listed)
 
 ## 3c. Device / data performance (2026-10-12)
 - [x] Portfolio + lightbox videos: 8s 480px loops instead of full originals (6 videos: ~58 MB → ~7.4 MB)

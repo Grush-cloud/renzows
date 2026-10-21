@@ -8,7 +8,7 @@ export default function About() {
         <div style={{ position: 'relative', zIndex: 1 }}>
           <div className="about-mark" />
           <p className="about-quote">
-            Where vision meets <em>precision</em> — and every detail
+            Where vision meets <em>precision</em>, and every detail
             tells a story worth remembering.
           </p>
         </div>
@@ -20,8 +20,8 @@ export default function About() {
         <h2 className="sec-title rv d1">Design that<br />moves <em>people.</em></h2>
 
         <p className="sec-body rv d2">
-          At RenzowsEventDesign, we believe the most powerful events aren't
-          just seen — they're felt. We bring together creative vision, meticulous
+          At Renzows Event Design, we believe the most powerful events aren't
+          just seen. They're felt. We bring together creative vision, meticulous
           planning, and an obsessive eye for detail to craft experiences that resonate.
         </p>
         <p className="sec-body rv d3" style={{ marginTop: 18 }}>

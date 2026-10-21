@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { NAV_LINKS } from '../constants'
 import Logo from './Logo'
+import SetsLogo from './SetsLogo'
 
 /**
  * Nav — shared across both RenzowsEventDesign and SetsByRenzows.
@@ -42,9 +43,7 @@ export default function Nav({ activeBrand = 'events', onSwitchBrand }) {
 
         {/* Logo */}
         <a href="#" className="nav-logo">
-          {activeBrand === 'events' ? <Logo /> : (
-            <><span className="nav-mark" style={{ cursor: 'default' }} />SetsByRenzows</>
-          )}
+          {activeBrand === 'events' ? <Logo /> : <SetsLogo />}
         </a>
 
         {/* Desktop links */}
@@ -62,7 +61,7 @@ export default function Nav({ activeBrand = 'events', onSwitchBrand }) {
               <button
                 className={`brand-switcher-btn ${activeBrand === 'events' ? 'active-events' : ''}`}
                 onClick={() => handleSwitch('events')}
-                title="Renzows Event Design — weddings, birthdays & corporate events"
+                title="Renzows Event Design: weddings, birthdays & corporate events"
               >
                 Events
                 {activeBrand === 'sets' && <span className="sets-dot" aria-hidden="true" />}
@@ -71,7 +70,7 @@ export default function Nav({ activeBrand = 'events', onSwitchBrand }) {
               <button
                 className={`brand-switcher-btn ${activeBrand === 'sets' ? 'active-sets' : ''}`}
                 onClick={() => handleSwitch('sets')}
-                title="SetsByRenzows — photoshoot sets & prop rentals"
+                title="SetsByRenzows: photoshoot sets & prop rentals"
               >
                 Sets
                 {activeBrand === 'events' && <span className="sets-dot" aria-hidden="true" />}

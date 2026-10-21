@@ -26,6 +26,12 @@ export default function Services() {
         ))}
       </div>
 
+      {/* Keeps the list from reading as "only these four" */}
+      <p className="svc-more rv">
+        Don't see your occasion? If it's worth celebrating, we'll design it.{' '}
+        <a href="#contact">Tell us about it →</a>
+      </p>
+
     </section>
   )
 }

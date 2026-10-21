@@ -22,7 +22,7 @@ export default function Founder() {
             "Every event is a blank canvas. My job is to make sure
             it becomes someone's favourite memory."
           </p>
-          <p className="founder-qattr">— Founder, RenzowsEventDesign</p>
+          <p className="founder-qattr">Founder, Renzows Event Design</p>
         </div>
       </div>
 
@@ -38,7 +38,7 @@ export default function Founder() {
 
         <p className="founder-bio rv d2">
           With over eight years in the world of event design, our founder built
-          RenzowsEventDesign on a simple but powerful belief — that the most
+          Renzows Event Design on a simple but powerful belief: that the most
           memorable events are the ones that feel deeply personal. Every detail,
           every texture, every moment of surprise is intentional.
         </p>
@@ -46,7 +46,7 @@ export default function Founder() {
         <p className="founder-bio rv d3">
           From small, intimate celebrations to large-scale corporate productions,
           the same warmth, precision, and creative energy goes into every single
-          event. Clients don't just get a service — they get a partner who
+          event. Clients don't just get a service. They get a partner who
           genuinely cares about making their vision come to life.
         </p>
 

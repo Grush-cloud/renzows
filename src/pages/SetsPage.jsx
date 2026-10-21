@@ -39,7 +39,7 @@ export default function SetsPage({ projects, loading }) {
           <p className="sets-intro-body">
             SetsByRenzows creates immersive, camera-ready environments for
             photoshoots, video productions, and brand campaigns. From intimate
-            portrait studios to full editorial productions — we design the
+            portrait studios to full editorial productions, we design the
             world your images live in.
           </p>
           <p className="sets-intro-body">
@@ -120,7 +120,7 @@ export default function SetsPage({ projects, loading }) {
             Let's build your<br /><em>perfect set.</em>
           </h2>
           <p className="sets-enquiry-sub">
-            Tell us about your shoot — the concept, the mood, the scale.
+            Tell us about your shoot: the concept, the mood, the scale.
             We'll design a space that makes every frame extraordinary.
           </p>
           <div className="sets-contact-detail">
@@ -178,7 +178,7 @@ export default function SetsPage({ projects, loading }) {
 
             <div className="sets-fg">
               <label>Tell us about your shoot</label>
-              <textarea placeholder="Concept, mood, references, team size — anything helps..." />
+              <textarea placeholder="Concept, mood, references, team size. Anything helps." />
             </div>
 
             <div className="sets-form-btn">

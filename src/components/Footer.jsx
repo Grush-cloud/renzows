@@ -1,4 +1,5 @@
 import Logo from './Logo'
+import SetsLogo from './SetsLogo'
 
 /**
  * Footer — shared across both brands.
@@ -12,9 +13,7 @@ export default function Footer({ activeBrand = 'events' }) {
   return (
     <footer>
       <div className="foot-logo">
-        {isEvents ? <Logo /> : (
-          <><span className="nav-mark" style={{ pointerEvents: 'none' }} />SetsByRenzows</>
-        )}
+        {isEvents ? <Logo /> : <SetsLogo />}
       </div>
 
       <p className="foot-copy">

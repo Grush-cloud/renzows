@@ -38,12 +38,12 @@ const HEROES = {
     content: (
       <>
         <h1 className="hero-h1">
-          <span className="hero-line a1">We turn rooms</span>
-          <span className="hero-line a2">into <em>nights</em></span>
+          <span className="hero-line a1">We turn spaces</span>
+          <span className="hero-line a2">into <em>moments</em></span>
           <span className="hero-line a3">people talk about.</span>
         </h1>
         <p className="hero-sub">
-          Event design &amp; décor in Nigeria — weddings, birthdays,
+          Event design &amp; décor in Nigeria for weddings, birthdays,
           corporate and private events.
         </p>
         <div className="hero-actions">
@@ -68,7 +68,7 @@ const HEROES = {
           <span className="hero-line a3">worth shooting.</span>
         </h1>
         <p className="hero-sub">
-          Bespoke photoshoot sets &amp; curated prop rentals — for photographers,
+          Bespoke photoshoot sets &amp; curated prop rentals for photographers,
           creatives and brands.
         </p>
         <div className="hero-actions">

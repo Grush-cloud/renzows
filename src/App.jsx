@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import PublicSite  from './pages/PublicSite'
 import SetsPage    from './pages/SetsPage'
 import Nav         from './components/Nav'
 import Footer      from './components/Footer'
 import Intro       from './components/Intro'
+import Cursor      from './components/Cursor'
 import { useCloudinaryFolder } from './hooks/useCloudinaryFolder'
 import { CLOUD_NAME }          from './config/cloudinary'
 
@@ -12,6 +13,11 @@ export default function App() {
 
   const { assets: eventProjects, loading: eventsLoading } = useCloudinaryFolder(CLOUD_NAME, 'renzows-events')
   const { assets: setsProjects,  loading: setsLoading   } = useCloudinaryFolder(CLOUD_NAME, 'renzows-sets')
+
+  // Browser-tab icon follows the brand
+  useEffect(() => {
+    document.querySelector('link[rel="icon"]').href = brand === 'sets' ? '/favicon-sets.svg' : '/favicon.svg'
+  }, [brand])
 
   function handleBrandSwitch(newBrand) {
     setBrand(newBrand)
@@ -22,6 +28,7 @@ export default function App() {
     <>
       {/* First entry to each brand per session: red carpet (events) / puzzle (sets) */}
       <Intro key={brand} brand={brand} />
+      <Cursor brand={brand} />
       <Nav
         activeBrand={brand}
         onSwitchBrand={handleBrandSwitch}

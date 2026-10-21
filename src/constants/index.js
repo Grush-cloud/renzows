@@ -19,29 +19,35 @@ export const NAV_LINKS = [
 ]
 
 // ─── Services ────────────────────────────────────────────────────
+// Matches the real portfolio: weddings, birthdays, corporate, private (see CATS)
 export const SERVICES = [
   {
     num: '01',
-    title: 'Corporate Events',
-    desc: 'Launches, galas, summits, and team milestones — we create corporate experiences that inspire, impress, and leave lasting impressions on every guest in the room.',
+    title: 'Weddings & Receptions',
+    desc: 'Ceremonies, receptions and everything in between. Rooms styled to your colours, your culture and your story, from intimate to grand.',
   },
   {
     num: '02',
-    title: 'Weddings & Celebrations',
-    desc: 'Your story deserves a setting that matches its beauty. We design wedding experiences as unique as the love at the centre of them — from intimate to extraordinary.',
+    title: 'Birthdays & Milestones',
+    desc: '21sts, 50ths, 70ths and every year worth marking. Themed rooms, statement backdrops and tables your guests will photograph first.',
   },
   {
     num: '03',
-    title: 'Brand Activations',
-    desc: 'Bring your brand to life with immersive, multi-sensory experiences that connect your audience emotionally to what you stand for — and keep them talking.',
+    title: 'Corporate & Brand Events',
+    desc: 'Launches, galas, end-of-year dinners and brand activations. Spaces that carry your brand and impress every guest in the room.',
+  },
+  {
+    num: '04',
+    title: 'Private Dinners & Gatherings',
+    desc: 'Candlelit dinners and small celebrations, with every detail considered, however few the guests.',
   },
 ]
 
 // ─── Process Steps ───────────────────────────────────────────────
 export const PROCESS_STEPS = [
-  { num: '01', title: 'Discovery',   desc: 'We sit with you to understand your vision, your guests, your brand — and the exact emotion you want every guest to feel.' },
-  { num: '02', title: 'Concept',     desc: 'Our creative team builds a full design concept — mood, palette, layout, and atmosphere — tailored entirely to you.' },
-  { num: '03', title: 'Production',  desc: 'We handle every detail of the build — vendor coordination, logistics, and on-site execution — with complete precision.' },
+  { num: '01', title: 'Discovery',   desc: 'We sit with you to understand your vision, your guests, your brand, and the exact emotion you want every guest to feel.' },
+  { num: '02', title: 'Concept',     desc: 'Our creative team builds a full design concept (mood, palette, layout and atmosphere) tailored entirely to you.' },
+  { num: '03', title: 'Production',  desc: 'We handle every detail of the build: vendor coordination, logistics and on-site execution.' },
   { num: '04', title: 'The Moment',  desc: "You arrive. You breathe it in. And you experience something genuinely unforgettable. That's exactly what we live for." },
 ]
 
@@ -56,10 +62,10 @@ export const FOUNDER_CREDS = [
 
 // ─── Ticker Items ────────────────────────────────────────────────
 export const TICKER_ITEMS = [
+  'Weddings & Receptions',
+  'Birthdays & Milestones',
   'Corporate Events',
-  'Weddings & Celebrations',
+  'Private Dinners',
+  'Galas & Launches',
   'Brand Activations',
-  'Galas & Dinners',
-  'Product Launches',
-  'Private Parties',
 ]
