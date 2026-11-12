@@ -1,4 +1,5 @@
 FILE_BREAKDOWN.md
 node_modules/
 dist/
-REVIEW-TODO.md.claude/
+REVIEW-TODO.md
+.claude/
