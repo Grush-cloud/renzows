@@ -1,3 +1,5 @@
+import PlanFlow from './PlanFlow'
+
 export default function Contact() {
   return (
     <section className="contact" id="contact">
@@ -31,45 +33,9 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Right — form */}
-      {/* TODO: wire up form submission (e.g. EmailJS, Formspree, or your own API) */}
+      {/* Right — the enquiry, as a tap-through brief */}
       <div className="rv d2">
-        <div className="form-row2">
-          <div className="fg">
-            <label>First Name</label>
-            <input type="text" placeholder="Your first name" />
-          </div>
-          <div className="fg">
-            <label>Last Name</label>
-            <input type="text" placeholder="Your last name" />
-          </div>
-        </div>
-
-        <div className="fg">
-          <label>Email Address</label>
-          <input type="email" placeholder="your@email.com" />
-        </div>
-
-        <div className="fg">
-          <label>Event Type</label>
-          <select defaultValue="">
-            <option value="" disabled>Select event type</option>
-            <option>Wedding</option>
-            <option>Birthday / Milestone</option>
-            <option>Corporate / Brand Event</option>
-            <option>Private Dinner / Gathering</option>
-            <option>Other</option>
-          </select>
-        </div>
-
-        <div className="fg">
-          <label>Tell us about your vision</label>
-          <textarea placeholder="Describe your event, date, size, and anything else..." />
-        </div>
-
-        <div className="form-btn">
-          <button type="button"><span>Send Message →</span></button>
-        </div>
+        <PlanFlow brand="events" />
       </div>
 
     </section>

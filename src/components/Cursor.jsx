@@ -4,7 +4,7 @@ const MAX_SPARKLES = 18   // cap live sparkles so fast mouse moves stay cheap
 const GAP = 22            // px of travel between sparkles
 
 // One ✦ that animates and removes itself
-function sparkle(x, y, brand) {
+export function sparkle(x, y, brand) {
   const s = document.createElement('span')
   s.className = `sparkle sparkle--${brand}`
   s.textContent = '✦'

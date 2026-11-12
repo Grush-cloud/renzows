@@ -3,6 +3,7 @@ import { SETS_CATS, SETS_CAT_LABELS } from '../constants/sets'
 import { useVideoAutoplay } from '../hooks/useVideoAutoplay'
 import { useReveal } from '../hooks/useReveal'
 import Hero from '../components/Hero'
+import PlanFlow from '../components/PlanFlow'
 import '../styles/sets.css'
 
 /**
@@ -140,55 +141,9 @@ export default function SetsPage({ projects, loading }) {
           </div>
         </div>
 
-        {/* Contact form */}
+        {/* The enquiry, as a tap-through brief */}
         <div className="sets-form rv d2">
-          <div className="sets-form-inner">
-
-            <div className="sets-form-row2">
-              <div className="sets-fg">
-                <label>First Name</label>
-                <input type="text" placeholder="Your first name" />
-              </div>
-              <div className="sets-fg">
-                <label>Last Name</label>
-                <input type="text" placeholder="Your last name" />
-              </div>
-            </div>
-
-            <div className="sets-fg">
-              <label>Email Address</label>
-              <input type="email" placeholder="your@email.com" />
-            </div>
-
-            <div className="sets-fg">
-              <label>Enquiry Type</label>
-              <select defaultValue="">
-                <option value="" disabled>What are you looking for?</option>
-                <option>Full Set Design</option>
-                <option>Prop Rental</option>
-                <option>Set Design + Props</option>
-                <option>Something else</option>
-              </select>
-            </div>
-
-            <div className="sets-fg">
-              <label>Shoot Date</label>
-              <input type="text" placeholder="Approximate date or timeframe" />
-            </div>
-
-            <div className="sets-fg">
-              <label>Tell us about your shoot</label>
-              <textarea placeholder="Concept, mood, references, team size. Anything helps." />
-            </div>
-
-            <div className="sets-form-btn">
-              {/* TODO: wire to EmailJS, Formspree, or your own API */}
-              <button type="button">
-                <span>Send Enquiry →</span>
-              </button>
-            </div>
-
-          </div>
+          <PlanFlow brand="sets" />
         </div>
 
       </section>

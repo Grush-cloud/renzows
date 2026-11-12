@@ -11,7 +11,7 @@ Verdict: the site reads as an AI template. The fix is real, specific content and
 - [ ] Founder's name (and OK to be the face of the brand)
 - [ ] 1–3 real testimonials (first name, event, OK to publish)
 - [ ] For each portfolio item: client/event name, venue, guest count, permission to publish
-- [ ] Form service choice: Formspree / EmailJS / WhatsApp-only / mailto
+- [x] Enquiries: WhatsApp + email (decided 2026-11-12; no budget step)
 - [ ] Optional: "starting from ₦___" price bands
 - [ ] Confirm "8+ years" / "200+ events" are true (removed from the hero until confirmed; still in About)
 
@@ -20,7 +20,9 @@ Verdict: the site reads as an AI template. The fix is real, specific content and
 - [ ] "Available Worldwide" → real city
 - [ ] Footer social links (`href="#"`)
 - [ ] Emails as `mailto:` links
-- [ ] Wire up both contact forms (`Contact.jsx`, `SetsPage.jsx`); link labels to inputs
+- [x] Contact forms replaced by "Plan your event" / "Plan your shoot" (`PlanFlow.jsx`): tap-through steps → brief → send on WhatsApp or email (no backend)
+- [ ] Put the real WhatsApp numbers + emails in `src/constants/plan.js` (`CONTACT`); the floating WhatsApp button reads them too
+- [ ] Owner to tune the steps / vibe options in `src/constants/plan.js` (`PLAN_FLOWS`) over time
 - [ ] Decide on WhatsApp vs the form as the main call to action
 
 ## 2. Code bugs

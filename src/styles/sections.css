@@ -425,61 +425,6 @@
 }
 .cd-val { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--dk); }
 
-.form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.fg { margin-bottom: 20px; }
-.fg label {
-  display: block;
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--md);
-  font-weight: 300;
-  margin-bottom: 8px;
-}
-.fg input, .fg textarea, .fg select {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid var(--gr);
-  padding: 9px 0;
-  font-family: 'Jost', sans-serif;
-  font-size: 13.5px;
-  font-weight: 300;
-  color: var(--dk);
-  background: transparent;
-  outline: none;
-  transition: border-color 0.3s;
-  -webkit-appearance: none;
-  border-radius: 0;
-}
-.fg input:focus, .fg textarea:focus, .fg select:focus { border-bottom-color: var(--m); }
-.fg textarea { resize: none; min-height: 72px; }
-
-.form-btn { margin-top: 24px; }
-.form-btn button {
-  width: 100%;
-  border: none;
-  background: var(--dk);
-  color: var(--wh);
-  padding: 14px 0;
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 11px;
-  letter-spacing: 0.17em;
-  text-transform: uppercase;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-}
-.form-btn button::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  transform: translateX(-100%);
-  background: var(--m);
-  transition: transform 0.35s;
-}
-.form-btn button:hover::before { transform: translateX(0); }
-.form-btn button span { position: relative; z-index: 1; }
 
 /* ── Footer ──────────────────────────────────────────────────── */
 footer {
@@ -491,7 +436,7 @@ footer {
   background: var(--lt);
 }
 @media (min-width: 768px) {
-  footer { padding: 36px 64px; flex-direction: row; align-items: center; justify-content: space-between; gap: 0; }
+  footer { padding: 36px 64px; flex-direction: row; align-items: center; justify-content: space-between; gap: 32px; }
 }
 .foot-logo {
   font-family: 'Cormorant Garamond', serif;
@@ -545,4 +490,155 @@ footer {
   color: var(--m);
   text-decoration: none;
   white-space: nowrap;
+}
+
+/* ── Plan your event (PlanFlow.jsx) ──────────────────────────────── */
+.plan {
+  --p-fg: var(--dk);
+  --p-muted: var(--md);
+  --p-line: var(--gr);
+  --p-card: var(--wh);
+  --p-accent: var(--m);
+  --p-on: #fbe6f0;
+  color: var(--p-fg);
+  border: 1px solid var(--p-line);
+  background: var(--p-card);
+  padding: 22px 20px 18px;
+}
+@media (min-width: 768px) { .plan { padding: 30px 30px 24px; } }
+/* Sets enquiry sits on a dark background */
+.plan--sets {
+  --p-fg: #fff;
+  --p-muted: rgba(255,255,255,0.7);
+  --p-line: rgba(255,255,255,0.14);
+  --p-card: rgba(255,255,255,0.04);
+  --p-accent: #c26ad9;
+  --p-on: rgba(194,106,217,0.18);
+}
+
+.plan-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--p-muted);
+}
+.plan-bar { height: 2px; background: var(--p-line); margin: 12px 0 24px; }
+.plan-bar i { display: block; height: 100%; background: var(--p-accent); transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+
+.plan-q {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(24px, 3vw, 30px);
+  line-height: 1.15;
+  margin-bottom: 6px;
+  outline: none;
+}
+.plan-hint { font-size: 13px; color: var(--p-muted); margin-bottom: 18px; }
+
+.plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.plan-opt {
+  position: relative;
+  min-height: 64px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  text-align: left;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  color: var(--p-fg);
+  background: transparent;
+  border: 1px solid var(--p-line);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+.plan-opt:hover { border-color: var(--p-accent); }
+.plan-opt:active { transform: scale(0.98); }
+.plan-opt.on { border-color: var(--p-accent); background: var(--p-on); box-shadow: inset 0 0 0 1px var(--p-accent); }
+
+/* Photo options: our own event stills, label over a dark fade */
+.plan-opt.has-img {
+  min-height: 120px;
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  border-color: transparent;
+}
+.plan-opt.has-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0.05) 65%);
+}
+.plan-opt.has-img .plan-opt-label { position: relative; }
+.plan-opt.has-img.on { box-shadow: inset 0 0 0 3px var(--p-accent); }
+
+.plan-swatch { display: flex; gap: 4px; }
+.plan-swatch span { width: 16px; height: 16px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.4); }
+
+.plan-label { display: block; font-size: 12px; color: var(--p-muted); margin: 10px 0 6px; }
+.plan-input {
+  width: 100%;
+  padding: 12px 14px;
+  font: inherit;
+  font-size: 15px;
+  color: var(--p-fg);
+  background: transparent;
+  border: 1px solid var(--p-line);
+  border-radius: 0;
+}
+.plan-input:focus { border-color: var(--p-accent); outline: none; }
+.plan-error { min-height: 20px; margin-top: 8px; font-size: 13px; color: #e5484d; }
+
+.plan-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; }
+.plan-link {
+  background: none;
+  border: none;
+  padding: 4px 0;
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--p-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.plan-go {
+  padding: 13px 24px;
+  font-family: 'Jost', sans-serif;
+  font-size: 11.5px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--p-accent);
+  border: none;
+  cursor: pointer;
+}
+
+.plan-brief { border-top: 1px solid var(--p-line); margin-bottom: 18px; }
+.plan-brief div { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--p-line); font-size: 14px; }
+.plan-brief dt { color: var(--p-muted); }
+.plan-brief dd { text-align: right; }
+
+.plan-wa {
+  display: block;
+  padding: 15px;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #1fa855;   /* WhatsApp green, darkened for white-text contrast */
+  text-decoration: none;
+}
+.plan-wa:hover { background: #188a45; }
+.plan-email {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--p-muted);
 }
