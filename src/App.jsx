@@ -6,21 +6,33 @@ import Footer      from './components/Footer'
 import Intro       from './components/Intro'
 import Cursor      from './components/Cursor'
 import { CONTACT } from './constants/plan'
+import { PAGES, brandFromPath } from './constants/seo'
 import { useCloudinaryFolder } from './hooks/useCloudinaryFolder'
 import { CLOUD_NAME }          from './config/cloudinary'
 
 export default function App() {
-  const [brand, setBrand] = useState('events')
+  // The address decides the brand: / = events, /sets = SetsByRenzows
 
   const { assets: eventProjects, loading: eventsLoading } = useCloudinaryFolder(CLOUD_NAME, 'renzows-events')
   const { assets: setsProjects,  loading: setsLoading   } = useCloudinaryFolder(CLOUD_NAME, 'renzows-sets')
 
-  // Browser-tab icon follows the brand
+  const [brand, setBrand] = useState(() => brandFromPath(window.location.pathname))
+
+  // Back/forward buttons move between the two pages
   useEffect(() => {
-    document.querySelector('link[rel="icon"]').href = brand === 'sets' ? '/favicon-sets.svg' : '/favicon.svg'
+    const onPop = () => setBrand(brandFromPath(window.location.pathname))
+    window.addEventListener('popstate', onPop)
+    return () => window.removeEventListener('popstate', onPop)
+  }, [])
+
+  // Tab title + icon follow the page (the built HTML already has them for first load)
+  useEffect(() => {
+    document.title = PAGES[brand].title
+    document.querySelector('link[rel="icon"]').href = PAGES[brand].icon
   }, [brand])
 
   function handleBrandSwitch(newBrand) {
+    if (newBrand !== brand) window.history.pushState(null, '', PAGES[newBrand].path)
     setBrand(newBrand)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
